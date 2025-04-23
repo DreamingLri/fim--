@@ -10,7 +10,7 @@ interface ControllSession {
 }
 
 export async function insertCode(this: any, session: ControllSession) {
-if (session.cancel || !this.editor) {
+  if (session.cancel || !this.editor) {
     return;
   }
 
@@ -29,9 +29,11 @@ if (session.cancel || !this.editor) {
   const position = editor.selection.active;
 
   // 使用编辑器的编辑功能插入补全内容
-  await editor.edit((editBuilder: { insert: (arg0: any, arg1: string) => void; }) => {
-    editBuilder.insert(position, selectedCompletion);
-  });
+  await editor.edit(
+    (editBuilder: { insert: (arg0: any, arg1: string) => void }) => {
+      editBuilder.insert(position, selectedCompletion);
+    },
+  );
 
   // 可选：显示通知，提示用户补全已插入
   vscode.window.showInformationMessage("补全已插入！");
